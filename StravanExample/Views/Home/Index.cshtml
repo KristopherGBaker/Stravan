@@ -1,0 +1,74 @@
+@{
+    ViewBag.Title = "Welcome to ASP.NET Single Page Application";
+}
+
+@section featured {
+<section class="featured">
+    <div class="content-wrapper">
+        <hgroup class="title">
+            <h1>@ViewBag.Title.</h1>
+        </hgroup>
+        <p>A <strong>single page application</strong> offers a richer user experience using JavaScript libraries and corresponding server components.</p>
+        <p>To learn more about building single page applications, visit <a href="http://www.asp.net/single-page-application" title="Single Page Applications Website">www.asp.net/single-page-application</a>.</p>
+    </div>
+</section>
+}
+
+<h3>We suggest the following:</h3>
+
+<ol class="round">
+    <li class="one">
+        <h5>Add model classes to your project</h5>
+        A model class holds data and behaviors related to your application. You'll find an example
+        model class already in your project at <code>\Models\TodoItem.cs</code>
+    </li>
+    <li class="two">
+        <h5>Use scaffolding to generate an initial User Interface (UI)</h5>
+        Build your solution (<em>Build -&gt; Build Solution</em>). Then, open the <em>Add Controller</em>
+        dialog by right-clicking on the <code>Controllers</code> folder, and choose <em>Add</em> &#9654;
+        <em>Controller</em>. If you want to use the <code>TodoItem</code> class, set the following options:
+        <ul>
+            <li><strong>Controller name:</strong> TasksController</li>
+            <li><strong>Template:</strong> Single Page Application with read/write actions and views, using Entity Framework</li>
+            <li><strong>Model class:</strong> TodoItem (YourApp.Models)</li>
+            <li><strong>Data context class:</strong> Choose <em>&lt;Add New...&gt;</em>, then click <em>OK</em></li>
+        </ul>
+        Then click <em>Add</em>. Finally, launch your application (<em>Debug -&gt; Start Debugging</em>), then browse to the URL <a href="/Tasks">/Tasks</a> to open the
+        UI you just scaffolded. 
+    </li>
+    <li class="three">
+        <h5>Extend and customize your code</h5>
+        The scaffolded application is intended only to help you get started quickly. You'll want to modify the generated code to customize
+        the UI and add extra features. For samples and tutorials, see <a href="http://www.asp.net/single-page-application" title="Single Page Applications Website">www.asp.net/single-page-application</a>.
+    </li>
+</ol>
+
+<section class="features">
+    <section class="feature">
+        <img src="~/Images/aspNetHome.png" alt="" />
+        <h3>Home of ASP.NET</h3>
+        <p>
+            ASP.NET is a free, fully supported Web application framework that helps you create standards-based web solutions. 
+            Whether you're new to ASP.NET or an experienced developer, the <a href="http://asp.net">ASP.NET website</a> 
+            is your source for news, training, downloads, and support.
+        </p>
+    </section>
+    <section class="feature">
+        <img src="~/Images/NuGetGallery.png" alt="" />
+        <h3>NuGet Gallery</h3>
+        <p>
+            NuGet is a Visual Studio extension that makes it easy to install and update open source libraries and tools in 
+            Visual Studio. To see available packages, visit the <a href="http://nuget.org">NuGet gallery</a>.
+            You can also develop your own package and share it in the gallery.
+        </p>
+    </section>
+    <section class="feature">
+        <img src="~/Images/findHosting.png" alt="" />
+        <h3>Find Web Hosting</h3>
+        <p>
+            You can easily find a web hosting company that offers the right mix of features and price for your applications. 
+            Visit <a href="http://microsoft.com/web/hosting" title="Microsoft/Web Website">Microsoft.com/web</a> to 
+            explore offerings from many providers.
+        </p>
+    </section>
+</section>

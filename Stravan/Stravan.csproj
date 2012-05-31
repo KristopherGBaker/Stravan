@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{AFD13B76-96B2-491F-8CC5-DA1FFFF6E2F2}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Stravan</RootNamespace>
+    <AssemblyName>Stravan</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EmpyrealNight.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\EmpyrealNight.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\log4net.2.0.0\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject">
+      <HintPath>..\packages\Ninject.3.0.0.15\lib\net40\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApiException.cs" />
+    <Compile Include="Athlete.cs" />
+    <Compile Include="AthleteSetting.cs" />
+    <Compile Include="Authentication.cs" />
+    <Compile Include="Bike.cs" />
+    <Compile Include="Club.cs" />
+    <Compile Include="ClubMembers.cs" />
+    <Compile Include="Configuration\ApiElement.cs" />
+    <Compile Include="Configuration\ClientElement.cs" />
+    <Compile Include="Configuration\Config.cs" />
+    <Compile Include="Configuration\StravanConfigurationSection.cs" />
+    <Compile Include="Configuration\VersionElement.cs" />
+    <Compile Include="Configuration\VersionElementCollection.cs" />
+    <Compile Include="Coordinate.cs" />
+    <Compile Include="AuthenticationV2.cs" />
+    <Compile Include="EffortDetailsV2.cs" />
+    <Compile Include="EffortSegmentV2.cs" />
+    <Compile Include="EffortV2.cs" />
+    <Compile Include="IUploadService.cs" />
+    <Compile Include="Json\UploadService.cs" />
+    <Compile Include="LeaderboardV2.cs" />
+    <Compile Include="LeaderV2.cs" />
+    <Compile Include="MapDetailV2.cs" />
+    <Compile Include="RideEffortsV2.cs" />
+    <Compile Include="RideV2.cs" />
+    <Compile Include="Effort.cs" />
+    <Compile Include="IAthleteService.cs" />
+    <Compile Include="IAuthenticationService.cs" />
+    <Compile Include="IClubService.cs" />
+    <Compile Include="IEffortService.cs" />
+    <Compile Include="IEntity.cs" />
+    <Compile Include="IRideService.cs" />
+    <Compile Include="ISegmentService.cs" />
+    <Compile Include="BaseService.cs" />
+    <Compile Include="Json\AuthenticationService.cs" />
+    <Compile Include="Json\ClubService.cs" />
+    <Compile Include="Json\AthleteService.cs" />
+    <Compile Include="Json\EffortService.cs" />
+    <Compile Include="IStravaWebClient.cs" />
+    <Compile Include="Json\JsonModule.cs" />
+    <Compile Include="Json\RideService.cs" />
+    <Compile Include="Json\SegmentService.cs" />
+    <Compile Include="Json\StravaWebClient.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Ride.cs" />
+    <Compile Include="RideEfforts.cs" />
+    <Compile Include="Segment.cs" />
+    <Compile Include="SegmentDetailsV2.cs" />
+    <Compile Include="SegmentEfforts.cs" />
+    <Compile Include="SegmentV2.cs" />
+    <Compile Include="ServiceLocator.cs" />
+    <Compile Include="UploadStatus.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
