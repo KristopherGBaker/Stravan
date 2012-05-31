@@ -57,11 +57,6 @@ namespace Stravan.Json
         private static readonly Semaphore WebClientPool = new Semaphore(PoolSize, PoolSize);
 
         /// <summary>
-        /// Concurrent collection of web clients
-        /// </summary>
-        private static readonly ConcurrentBag<WebClient> WebClientBag = new ConcurrentBag<WebClient>();
-
-        /// <summary>
         /// Base url for the Strava API v1
         /// </summary>
         private static readonly string BaseUrlV1 = Config.Stravan.Api.Versions["1"].BaseUrl;
@@ -82,14 +77,10 @@ namespace Stravan.Json
         private static readonly string SecureBaseUrlV2 = Config.Stravan.Api.Versions["2"].SecureBaseUrl;
 
         /// <summary>
-        /// Static constructor that initializes the concurrent collection with all of its web clients
+        /// Static constructor
         /// </summary>
         static StravaWebClient()
         {
-            for (var index = 0; index < PoolSize; index++)
-            {
-                WebClientBag.Add(new WebClient());
-            }
         }
 
         /// <summary>
@@ -120,10 +111,7 @@ namespace Stravan.Json
             bool isSecure = false, ApiVersionType versionType = ApiVersionType.VersionOne)
         {
             return MakeRequest(action, querystringParameters, isSecure, versionType,
-                (url, client) =>
-                {
-                    return postParameters != null ? client.UploadValues(url, postParameters) : client.DownloadData(url);
-                });
+                (url, client) => postParameters != null ? client.UploadValues(url, postParameters) : client.DownloadData(url));
         }
 
         /// <summary>
@@ -154,10 +142,7 @@ namespace Stravan.Json
             ApiVersionType versionType = ApiVersionType.VersionOne)
         {
             return MakeRequest(action, querystringParameters, isSecure, versionType, 
-                (url, client) => 
-                { 
-                    return client.UploadData(url, "POST", jsonData); 
-                });
+                (url, client) => client.UploadData(url, "POST", jsonData));
         }
 
         private byte[] MakeRequest(string action, NameValueCollection querystringParameters, bool isSecure,
@@ -186,7 +171,6 @@ namespace Stravan.Json
                 client.QueryString = querystringParameters ?? new NameValueCollection();
 
                 data = actualRequest(url, client);
-                //data = client.UploadData(url, "POST", jsonData);
             }
             catch (WebException webException)
             {
@@ -205,27 +189,22 @@ namespace Stravan.Json
         }
 
         /// <summary>
-        /// Gets a web client from the pool.  If no clients are available, the method will wait until one is available.
+        /// Gets a new web client.  If no client allocations are available, the method will wait until one is available.
         /// </summary>
         /// <returns>Web client from the pool.</returns>
         private static WebClient GetClient()
         {
             WebClientPool.WaitOne();
-
-            WebClient client = null;
-            WebClientBag.TryTake(out client);
-
-            return client;
+            return new WebClient();
         }
 
         /// <summary>
-        /// Returns a web client to the pool.
+        /// Releases a web client.
         /// </summary>
-        /// <param name="client">Web client to return to the pool.</param>
+        /// <param name="client">Web client to release.</param>
         private static void ReleaseClient(WebClient client)
         {
-            WebClientBag.Add(client);
-            WebClientPool.Release();
+            client.Dispose();
         }
     }
 }
