@@ -28,6 +28,7 @@ using System.Text.RegularExpressions;
 using NUnit.Framework;
 using log4net;
 using EmpyrealNight.Core;
+using Stravan.Json;
 
 namespace Stravan.Tests
 {
@@ -35,17 +36,12 @@ namespace Stravan.Tests
     /// Encapsulates tests for the club service
     /// </summary>
     [TestFixture]
-    public class ClubServiceFixture
+    public class ClubServiceFixture : BaseServiceFixture
     {
         /// <summary>
         /// Log
         /// </summary>
         private static readonly ILog Log = LogManager.GetLogger(typeof(ClubServiceFixture));
-
-        /// <summary>
-        /// Nema team id
-        /// </summary>
-        private const int NemaId = 7152;
 
         /// <summary>
         /// Gets or sets the club service
@@ -56,16 +52,22 @@ namespace Stravan.Tests
         /// Setup for all tests
         /// </summary>
         [SetUp]
-        public void Setup()
+        public override void Setup()
         {
+            base.Setup();
+
+#if UNIT
+            ClubService = new ClubService(WebClient);
+#elif INT
             ClubService = ServiceLocator.Get<IClubService>();
+#endif
         }
 
         /// <summary>
-        /// Test that searches for clubs matching "nema"
+        /// Test that searches for clubs
         /// </summary>
         [Test]
-        public void IndexNema()
+        public void Index()
         {
             var clubs = ClubService.Index("nema");
             Assert.That(clubs != null);
@@ -75,15 +77,15 @@ namespace Stravan.Tests
         }
 
         /// <summary>
-        /// Test that gets the details for the nema club
+        /// Test that gets the details for the club
         /// </summary>
         [Test]
-        public void ShowNema()
+        public void Show()
         {
-            var club = ClubService.Show(NemaId);
+            var club = ClubService.Show(ClubId);
             Assert.That(club != null);
-            Assert.That(club.Id == NemaId);
-            Assert.That(Regex.IsMatch(club.Name, "nema", RegexOptions.IgnoreCase));
+            Assert.That(club.Id == ClubId);
+            Assert.That(Regex.IsMatch(club.Name, ClubName, RegexOptions.IgnoreCase));
             Assert.That(!string.IsNullOrWhiteSpace(club.Description));
             Assert.That(!string.IsNullOrWhiteSpace(club.Location));
 
@@ -91,17 +93,17 @@ namespace Stravan.Tests
         }
 
         /// <summary>
-        /// Test that gets the members of the nema club
+        /// Test that gets the members of the club
         /// </summary>
         [Test]
-        public void NemaMembers()
+        public void Members()
         {
-            var clubMembers = ClubService.Members(NemaId);
+            var clubMembers = ClubService.Members(ClubId);
             Assert.That(clubMembers.Club != null);
 
             var club = clubMembers.Club;
             Assert.That(club != null);
-            Assert.That(club.Id == NemaId);
+            Assert.That(club.Id == ClubId);
             Assert.That(!string.IsNullOrWhiteSpace(club.Name));
 
             Assert.That(clubMembers.Members != null);

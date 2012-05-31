@@ -24,10 +24,9 @@
 
 #endregion
 
-using System.Text.RegularExpressions;
 using NUnit.Framework;
 using log4net;
-using EmpyrealNight.Core;
+using Stravan.Json;
 
 namespace Stravan.Tests
 {
@@ -35,22 +34,12 @@ namespace Stravan.Tests
     /// Encapsulates test for the authentication service
     /// </summary>
     [TestFixture]
-    public class AuthenticationServiceFixture
+    public class AuthenticationServiceFixture : BaseServiceFixture
     {
         /// <summary>
         /// Log
         /// </summary>
         private static readonly ILog Log = LogManager.GetLogger(typeof(AuthenticationServiceFixture));
-
-        ///// <summary>
-        ///// Email
-        ///// </summary>
-        //private const string Email = "";
-
-        ///// <summary>
-        ///// Password
-        ///// </summary>
-        //private const string Password = "";
 
         /// <summary>
         /// Gets or sets the authentication service
@@ -61,25 +50,47 @@ namespace Stravan.Tests
         /// Setup for all tests
         /// </summary>
         [SetUp]
-        public void Setup()
+        public override void Setup()
         {
+            base.Setup();
+
+#if UNIT
+            AuthenticationService = new AuthenticationService(WebClient);
+#elif INT
             AuthenticationService = ServiceLocator.Get<IAuthenticationService>();
+#endif
         }
 
         ///// <summary>
         ///// Tests for successful login
         ///// </summary>
-        //[Test]
-        //public void LoginSuccess()
-        //{
-        //    var auth = AuthenticationService.Login(Email, Password);
-        //    Assert.That(auth != null);
-        //    Assert.That(auth.IsSuccess);
-        //    Assert.That(auth.AthleteId > 0);
-        //    Assert.That(auth.Token != null);
-        //    Assert.That(auth.Token.Length > 0);
+        [Test]
+        public void LoginSuccess()
+        {
+            var auth = AuthenticationService.Login(Email, Password);
+            Assert.That(auth != null);
+            Assert.That(auth.IsSuccess);
+            Assert.That(auth.AthleteId > 0);
+            Assert.That(auth.Token != null);
+            Assert.That(auth.Token.Length > 0);
 
-        //    Log.Debug(auth);
-        //}
+            Log.Debug(auth);
+        }
+
+        ///// <summary>
+        ///// Tests for successful login
+        ///// </summary>
+        [Test]
+        public void LoginSuccessV2()
+        {
+            var auth = AuthenticationService.LoginV2(Email, Password, true);
+            Assert.That(auth != null);
+            Assert.That(string.IsNullOrWhiteSpace(auth.Error));
+            Assert.That(auth.Athlete != null);
+            Assert.That(auth.Token != null);
+            Assert.That(auth.Token.Length > 0);
+
+            Log.Debug(auth);
+        }
     }
 }

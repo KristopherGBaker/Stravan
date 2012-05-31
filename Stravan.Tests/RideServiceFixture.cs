@@ -42,11 +42,6 @@ namespace Stravan.Tests
         /// </summary>
         private static readonly ILog Log = LogManager.GetLogger(typeof(RideServiceFixture));
 
-        ///// <summary>
-        ///// Token
-        ///// </summary>
-       // private const string Token = "";
-
         /// <summary>
         /// Gets or sets the ride service
         /// </summary>
@@ -61,7 +56,7 @@ namespace Stravan.Tests
             base.Setup();
 #if UNIT
             RideService = new RideService(WebClient);
-#elif INTEGRATION
+#elif INT
             RideService = ServiceLocator.Get<IRideService>();
 #endif
         }
@@ -72,9 +67,9 @@ namespace Stravan.Tests
         [Test]
         public void Show()
         {
-            var ride = RideService.Show(EastsideRideId);
+            var ride = RideService.Show(RideId);
             Assert.That(ride != null);
-            Assert.That(ride.Id == EastsideRideId);
+            Assert.That(ride.Id == RideId);
             Assert.That(!string.IsNullOrWhiteSpace(ride.Name));
             Log.Debug(ride);
         }
@@ -86,9 +81,9 @@ namespace Stravan.Tests
         public void ShowV2()
         {
             //System.Diagnostics.Debugger.Launch();
-            var ride = RideService.ShowV2(EastsideRideId);
+            var ride = RideService.ShowV2(RideId);
             Assert.That(ride != null);
-            Assert.That(ride.Id == EastsideRideId);
+            Assert.That(ride.Id == RideId);
             Assert.That(!string.IsNullOrWhiteSpace(ride.Name));
             Log.Debug(ride);
         }
@@ -99,7 +94,7 @@ namespace Stravan.Tests
         [Test]
         public void SyncedV2()
         {
-            Assert.That(RideService.IsSyncedV2(EastsideRideId, RideVersion));
+            Assert.That(RideService.IsSyncedV2(RideId, RideVersion));
         }
 
         /// <summary>
@@ -134,7 +129,7 @@ namespace Stravan.Tests
         [Test]
         public void EffortsForRide()
         {
-            var rideEfforts = RideService.Efforts(EastsideRideId);
+            var rideEfforts = RideService.Efforts(RideId);
             Assert.That(rideEfforts != null);
             Assert.That(rideEfforts.Ride != null);
             Assert.That(rideEfforts.Efforts != null);
@@ -150,43 +145,33 @@ namespace Stravan.Tests
         [Test]
         public void EffortsForRideV2()
         {
-            var rideEfforts = RideService.EffortsV2(EastsideRideId);
+            var rideEfforts = RideService.EffortsV2(RideId);
             Assert.That(rideEfforts != null);
-            Assert.That(rideEfforts.RideId == EastsideRideId);
+            Assert.That(rideEfforts.RideId == RideId);
             Assert.That(rideEfforts.Efforts != null);
             Assert.That(rideEfforts.Efforts.Count > 0);
 
             Log.Debug(rideEfforts);
         }
 
-        //[Test]
-        //public void MapDetailsV2()
-        //{
-        //    var mapDetails = RideService.MapDetailsV2(EastsideRideId, Token);
-        //    Assert.That(mapDetails != null);
-        //    Assert.That(mapDetails.RideId == EastsideRideId);
-        //    Assert.That(!string.IsNullOrWhiteSpace(mapDetails.Version));
-        //    Assert.That(mapDetails.Coordinates != null);
-        //    Assert.That(mapDetails.Coordinates.Count > 0);
-        //    Log.Debug(mapDetails);
-        //}
+        [Test]
+        public void MapDetailsV2()
+        {
+            var mapDetails = RideService.MapDetailsV2(RideId, Token);
+            Assert.That(mapDetails != null);
+            Assert.That(mapDetails.RideId == RideId);
+            Assert.That(!string.IsNullOrWhiteSpace(mapDetails.Version));
+            Assert.That(mapDetails.Coordinates != null);
+            Assert.That(mapDetails.Coordinates.Count > 0);
+            Log.Debug(mapDetails);
+        }
 
         [Test]
         public void EffortDetailsForRideV2()
         {
-            var effortDetails = RideService.ShowEffortsV2(EastsideRideId, EastsideToSinkerCreekEffort);
+            var effortDetails = RideService.ShowEffortsV2(RideId, EffortId);
             Assert.That(effortDetails != null);
             Log.Debug(effortDetails);
         }
-
-        //[Test]
-        //public void MapDetails()
-        //{
-        //    var coordinates = RideService.MapDetails(EastsideRideId, Token);
-        //    Assert.That(coordinates != null);
-        //    Assert.That(coordinates.Count > 0);
-
-        //    coordinates.Each(coordinate => Log.Debug(coordinate));
-        //}
     }
 }

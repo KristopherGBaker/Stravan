@@ -27,6 +27,7 @@
 using NUnit.Framework;
 using log4net;
 using EmpyrealNight.Core;
+using Stravan.Json;
 
 namespace Stravan.Tests
 {
@@ -34,22 +35,12 @@ namespace Stravan.Tests
     /// Encapsulates tests for segment service
     /// </summary>
     [TestFixture]
-    public class SegmentServiceFixture
+    public class SegmentServiceFixture : BaseServiceFixture
     {
         /// <summary>
         /// Log
         /// </summary>
         private static readonly ILog Log = LogManager.GetLogger(typeof(SegmentServiceFixture));
-
-        /// <summary>
-        /// Segment id for Eastside
-        /// </summary>
-        private const int UpperEastsideSegmentId = 686627;
-
-        /// <summary>
-        /// My athelete id
-        /// </summary>
-        private const int AthleteId = 476912;
 
         /// <summary>
         /// Gets or sets the segment service
@@ -60,20 +51,26 @@ namespace Stravan.Tests
         /// Setup for all tests
         /// </summary>
         [SetUp]
-        public void Setup()
+        public override void Setup()
         {
+            base.Setup();
+
+#if UNIT
+            SegmentService = new SegmentService(WebClient);
+#elif INT
             SegmentService = ServiceLocator.Get<ISegmentService>();
+#endif
         }
 
         /// <summary>
-        /// Test that gets the segment details for Eastside
+        /// Test that gets the segment details
         /// </summary>
         [Test]
-        public void ShowUpperEastside()
+        public void Show()
         {
-            var segment = SegmentService.Show(UpperEastsideSegmentId);
+            var segment = SegmentService.Show(SegmentId);
             Assert.That(segment != null);
-            Assert.That(segment.Id == UpperEastsideSegmentId);
+            Assert.That(segment.Id == SegmentId);
 
             Log.Debug(segment);
         }
@@ -84,7 +81,7 @@ namespace Stravan.Tests
         [Test]
         public void EffortsByAthleteId()
         {
-            var segmentEfforts = SegmentService.Efforts(segmentId: UpperEastsideSegmentId, athleteId: AthleteId);
+            var segmentEfforts = SegmentService.Efforts(segmentId: SegmentId, athleteId: AthleteId);
             Assert.That(segmentEfforts != null);
             Assert.That(segmentEfforts.Segment != null);
             Assert.That(segmentEfforts.Efforts != null);
@@ -94,12 +91,12 @@ namespace Stravan.Tests
         }
 
         /// <summary>
-        /// Test that searches for segments with the name "Eastside"
+        /// Test that searches for segments with the name
         /// </summary>
         [Test]
         public void Index()
         {
-            var segments = SegmentService.Index("Eastside");
+            var segments = SegmentService.Index(SegmentName);
             Assert.That(segments != null);
 
             segments.Each(segment => Log.Debug(segment));

@@ -244,33 +244,6 @@ namespace Stravan.Json
             return effortDetailsWrapper.ToEffortDetails();
         }
 
-        ///// <summary>
-        ///// Returns an array of lat/lng points and an array of segments covered by the points.  Each segment has an Id as well as start and end indices which index into the array of lat/lng points.
-        ///// </summary>
-        ///// <param name="id">Required. The Id of the Ride.</param>
-        ///// <param name="token">Required. Authentication token.</param>
-        ///// <param name="threshold"></param>
-        ///// <returns>Optional. If provided, the array of lat/lng points will be reduced to exclude "uninteresting" points within a tolerance of threshold meters.</returns>
-        //public List<Coordinate> MapDetails(int id, string token, double? threshold = null)
-        //{
-        //    if (token == null)
-        //        throw new ArgumentNullException("token");
-
-        //    if (token.Length == 0)
-        //        throw new ArgumentException("token", "token cannot be empty");
-
-        //    var parameters = new NameValueCollection { { "token", token } };
-
-        //    if (threshold.HasValue && threshold.Value > 0)
-        //    {
-        //        parameters.Add("threshold", threshold.Value.ToString());
-        //    }
-
-        //    var response = Client.Download(string.Format("rides/{0}/map_details", id), parameters, isSecure: true);
-
-        //    return JsonDeserializer.Deserialize<CoordinatesWrapper>(response).Coordinates;
-        //}
-
         #region wrapper classes
 
         /// <summary>

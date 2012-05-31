@@ -5,8 +5,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stravan", "Stravan\Stravan.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stravan.Tests", "Stravan.Tests\Stravan.Tests.csproj", "{197C7E48-798C-4933-92B4-91F44AC53E11}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StravanExample", "StravanExample\StravanExample.csproj", "{55ABFAD3-12BA-4135-AC86-7C4B08A87FB4}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug Integration Test|Any CPU = Debug Integration Test|Any CPU
@@ -23,14 +21,6 @@ Global
 		{197C7E48-798C-4933-92B4-91F44AC53E11}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{197C7E48-798C-4933-92B4-91F44AC53E11}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{197C7E48-798C-4933-92B4-91F44AC53E11}.Release|Any CPU.Build.0 = Release|Any CPU
-		{55ABFAD3-12BA-4135-AC86-7C4B08A87FB4}.Debug Integration Test|Any CPU.ActiveCfg = Debug|Any CPU
-		{55ABFAD3-12BA-4135-AC86-7C4B08A87FB4}.Debug Integration Test|Any CPU.Build.0 = Debug|Any CPU
-		{55ABFAD3-12BA-4135-AC86-7C4B08A87FB4}.Debug Unit Test|Any CPU.ActiveCfg = Debug|Any CPU
-		{55ABFAD3-12BA-4135-AC86-7C4B08A87FB4}.Debug Unit Test|Any CPU.Build.0 = Debug|Any CPU
-		{55ABFAD3-12BA-4135-AC86-7C4B08A87FB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{55ABFAD3-12BA-4135-AC86-7C4B08A87FB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{55ABFAD3-12BA-4135-AC86-7C4B08A87FB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{55ABFAD3-12BA-4135-AC86-7C4B08A87FB4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AFD13B76-96B2-491F-8CC5-DA1FFFF6E2F2}.Debug Integration Test|Any CPU.ActiveCfg = Debug|Any CPU
 		{AFD13B76-96B2-491F-8CC5-DA1FFFF6E2F2}.Debug Integration Test|Any CPU.Build.0 = Debug|Any CPU
 		{AFD13B76-96B2-491F-8CC5-DA1FFFF6E2F2}.Debug Unit Test|Any CPU.ActiveCfg = Debug|Any CPU

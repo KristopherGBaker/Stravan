@@ -26,6 +26,7 @@
 
 using NUnit.Framework;
 using log4net;
+using Stravan.Json;
 
 namespace Stravan.Tests
 {
@@ -33,17 +34,12 @@ namespace Stravan.Tests
     /// Encapsulates tests for the effort service
     /// </summary>
     [TestFixture]
-    public class EffortServiceFixture
+    public class EffortServiceFixture : BaseServiceFixture
     {
         /// <summary>
         /// Log
         /// </summary>
         private static readonly ILog Log = LogManager.GetLogger(typeof(EffortServiceFixture));
-
-        /// <summary>
-        /// Effort id for one of my rides on Eastside
-        /// </summary>
-        private const int UpperEastsideEffortId = 153532048;
 
         /// <summary>
         /// Gets or sets the effort service
@@ -54,9 +50,15 @@ namespace Stravan.Tests
         /// Setup for all tests
         /// </summary>
         [SetUp]
-        public void Setup()
+        public override void Setup()
         {
+            base.Setup();
+
+#if UNIT
+            EffortService = new EffortService(WebClient);
+#elif INT
             EffortService = ServiceLocator.Get<IEffortService>();
+#endif
         }
 
         /// <summary>
@@ -65,9 +67,9 @@ namespace Stravan.Tests
         [Test]
         public void Show()
         {
-            var effort = EffortService.Show(UpperEastsideEffortId);
+            var effort = EffortService.Show(EffortId);
             Assert.That(effort != null);
-            Assert.That(effort.Id == UpperEastsideEffortId);
+            Assert.That(effort.Id == EffortId);
             Log.Debug(effort);
         }
     }

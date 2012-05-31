@@ -40,11 +40,6 @@ namespace Stravan.Tests
         /// </summary>
         private static readonly ILog Log = LogManager.GetLogger(typeof(AthleteServiceFixture));
 
-        ///// <summary>
-        ///// Token
-        ///// </summary>
-        //private const string Token = "";
-
         /// <summary>
         /// Gets or sets the authentication service
         /// </summary>
@@ -57,21 +52,24 @@ namespace Stravan.Tests
         public override void Setup()
         {
             base.Setup();
-            //mock.Setup...
+#if UNIT
             AthleteService = new AthleteService(WebClient);
+#elif INT
+            AthleteService = ServiceLocator.Get<IAthleteService>();
+#endif
         }
 
         ///// <summary>
         ///// Tests for successful login
         ///// </summary>
-        //[Test]
-        //public void Show()
-        //{
-        //    var athlete = AthleteService.Show(Token, AthleteId);
-        //    Assert.That(athlete != null);
-        //    Assert.That(athlete.Id == AthleteId);
+        [Test]
+        public void Show()
+        {
+            var athlete = AthleteService.Show(Token, AthleteId);
+            Assert.That(athlete != null);
+            Assert.That(athlete.Id == AthleteId);
 
-        //    Log.Debug(athlete);
-        //}
+            Log.Debug(athlete);
+        }
     }
 }

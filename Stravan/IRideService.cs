@@ -123,14 +123,5 @@ namespace Stravan
         /// <param name="effortId">Required. The segment effort's id.</param>
         /// <returns>Returns information about a specific segment effort on a specific ride.</returns>
         EffortDetailsV2 ShowEffortsV2(int rideId, int effortId);
-
-        ///// <summary>
-        ///// Returns an array of lat/lng points and an array of segments covered by the points.  Each segment has an Id as well as start and end indices which index into the array of lat/lng points.
-        ///// </summary>
-        ///// <param name="id">Required. The Id of the Ride.</param>
-        ///// <param name="token">Required. Authentication token.</param>
-        ///// <param name="threshold"></param>
-        ///// <returns>Optional. If provided, the array of lat/lng points will be reduced to exclude "uninteresting" points within a tolerance of threshold meters.</returns>
-        //List<Coordinate> MapDetails(int id, string token, double? threshold = null);
     }
 }
