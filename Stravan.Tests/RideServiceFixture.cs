@@ -116,7 +116,7 @@ namespace Stravan.Tests
         [Test]
         public void IndexByAthleteName()
         {
-            var rides = RideService.Index(athleteName: "kris_baker");
+            var rides = RideService.Index(athleteName: AthleteName);
             Assert.That(rides != null);
             Assert.That(rides.Count > 0);
 
