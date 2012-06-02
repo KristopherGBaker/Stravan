@@ -26,7 +26,6 @@
 
 using System;
 using System.Collections.Specialized;
-using System.Collections.Concurrent;
 using System.Net;
 using System.Text;
 using System.Threading;
@@ -204,6 +203,7 @@ namespace Stravan.Json
         /// <param name="client">Web client to release.</param>
         private static void ReleaseClient(WebClient client)
         {
+            WebClientPool.Release();
             client.Dispose();
         }
     }
