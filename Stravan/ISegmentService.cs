@@ -60,7 +60,8 @@ namespace Stravan
         /// <param name="endDate">Optional. Day on which to end search for Efforts. The date is the local time of when the effort started.</param>
         /// <param name="startId">Optional. Only return Effforts with an Id greater than or equal to the startId.</param>
         /// <param name="isBest">Optional. Shows an best efforts per athlete sorted by elapsed time ascending (segment leaderboard).</param>
+        /// <param name="offset">Optional. Any search will return at most 50 rows. To retrieve results after the 50th row use the offset parameter. For example, to retrieve rows 51-100 use an offset of 50.</param>
         /// <returns>List of matching Efforts on a Segment.</returns>
-        SegmentEfforts Efforts(int segmentId, int? clubId = null, int? athleteId = null, string athleteName = null, DateTime? startDate = null, DateTime? endDate = null, int? startId = null, bool? isBest = null);
+        SegmentEfforts Efforts(int segmentId, int? clubId = null, int? athleteId = null, string athleteName = null, DateTime? startDate = null, DateTime? endDate = null, int? startId = null, bool? isBest = null, int? offset = null);
     }
 }
