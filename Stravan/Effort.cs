@@ -35,6 +35,12 @@ namespace Stravan
     public class Effort
     {
         /// <summary>
+        /// Gets or sets the id of the activity
+        /// </summary>
+        [JsonName("activityId")]
+        public int ActivityId { get; set; }
+
+        /// <summary>
         /// Gets or sets the id of the effort
         /// </summary>
         [JsonName("id")]
@@ -123,6 +129,7 @@ namespace Stravan
             var builder = new StringBuilder();
 
             builder.AppendFormat("\nid: {0}\n", Id);
+            builder.AppendFormat("actvityId: {0}\n", ActivityId);
             builder.AppendFormat("startDate: {0}\n", StartDate ?? string.Empty);
             builder.AppendFormat("startDateLocal: {0}\n", StartDateLocal ?? string.Empty);
             builder.AppendFormat("timeZoneOffset: {0}\n", TimeZoneOffset);
